@@ -1,5 +1,2 @@
 test file for git
 second line
-second line
-third line
-123
