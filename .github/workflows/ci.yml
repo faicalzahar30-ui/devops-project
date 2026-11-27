@@ -1,0 +1,24 @@
+# name of the pipeline
+name: first-ci
+
+# when it runs
+on:
+  push:
+
+# what it does
+jobs:
+  test:
+    # GitHub's Ubuntu machine (free)
+    runs-on: ubuntu-latest
+
+    steps:
+      # step 1: copy your code onto the machine
+      - uses: actions/checkout@v4
+
+      # step 2: show the files
+      - name: list files
+        run: ls -la
+
+      # step 3: say hello
+      - name: greet
+        run: echo "CI pipeline works!"
