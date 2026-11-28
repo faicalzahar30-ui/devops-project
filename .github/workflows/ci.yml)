@@ -1,0 +1,21 @@
+# add this AFTER the 'check' job (same indentation level)
+  docker:
+    # run only if 'check' succeeded
+    needs: check
+    runs-on: ubuntu-latest
+
+    steps:
+      # step 1: copy code
+      - uses: actions/checkout@v4
+
+      # step 2: build the image (Docker is preinstalled on the runner)
+      - name: build mysite image
+        run: docker build -t mysite:ci ./mysite
+
+      # step 3: run it and test with curl
+      - name: run container and check it
+        run: |
+          docker run -d -p 8080:80 --name web mysite:ci
+          sleep 3
+          curl -f http://localhost:8080)
+
